@@ -1,0 +1,119 @@
+/* Reset default browser styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background: radial-gradient(circle, #6764bcdf 0%, #6b64bcdf 50%, #0f0e4b 100%);
+    color: #f7f7f7c1;
+    margin: 0;
+    padding: 0;
+}
+
+
+.logo a {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #f7f7f7c1;
+}
+
+/* Main layout styles */
+.content-wrapper {
+    display: flex;
+    padding-top: 100px;
+    /* Space for the fixed header */
+}
+
+.main-content {
+    flex: 2;
+    max-width: 800px;
+    margin-left: 200px;
+    /* Space from the left */
+    padding: 20px;
+    background-color: transparent;
+}
+
+.sidebar {
+    flex: 1;
+    padding: 20px;
+    background-color: transparent;
+    /* Make the sidebar background transparent */
+    position: sticky;
+    top: 100px;
+    /* Sticks to the top as you scroll */
+    height: 100vh;
+    overflow-y: auto;
+}
+
+/* Navigation items */
+.container ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.container ul li {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.container ul li a {
+    text-decoration: none;
+    color: #f7f7f7;
+    font-weight: 500;
+    padding-left: 10px;
+    transition: all 0.3s;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.container ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 2px;
+    background-color: #007BFF;
+    transition: width 0.3s;
+}
+
+.container ul li:hover::before {
+    width: 40px;
+}
+
+.container ul li:hover a {
+    transform: translateX(20px);
+    /* Move text slightly on hover */
+}
+
+.container ul li a.active {
+    color: #007BFF;
+    font-weight: bold;
+}
+
+/* Social icons styles */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    /* Center icons */
+    gap: 15px;
+    margin-top: 20px;
+    position: absolute;
+}
+
+.social-icon img {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s;
+}
+
+.social-icon:hover img {
+    transform: scale(1.1);
+}
