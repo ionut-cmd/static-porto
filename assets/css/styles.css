@@ -8,12 +8,21 @@
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    background: radial-gradient(circle, #6764bcdf 0%, #6b64bcdf 50%, #0f0e4b 100%);
+    font-weight: 300;
+    background: radial-gradient(circle, #201e5edf 0%, #0c0a27df 50%, #1e1d61 100%);
     color: #f7f7f7c1;
     margin: 0;
     padding: 0;
 }
 
+.about-text {
+    font-size: 1.2em;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    color: #d1ffd1;
+    line-height: 1.3;
+    margin-bottom: 20px;
+}
 
 .logo a {
     text-decoration: none;
@@ -26,28 +35,26 @@ body {
 .content-wrapper {
     display: flex;
     padding-top: 100px;
-    /* Space for the fixed header */
 }
 
 .main-content {
     flex: 2;
     max-width: 800px;
-    margin-left: 200px;
-    /* Space from the left */
+    margin-left: 300px;
     padding: 20px;
     background-color: transparent;
 }
 
 .sidebar {
-    flex: 1;
+    flex: 0 0 500px;
     padding: 20px;
     background-color: transparent;
-    /* Make the sidebar background transparent */
     position: sticky;
     top: 100px;
-    /* Sticks to the top as you scroll */
     height: 100vh;
     overflow-y: auto;
+    min-width: 500px;
+    margin-right: 300px;
 }
 
 /* Navigation items */
@@ -65,7 +72,7 @@ body {
 .container ul li a {
     text-decoration: none;
     color: #f7f7f7;
-    font-weight: 500;
+    font-weight: 300;
     padding-left: 10px;
     transition: all 0.3s;
     display: inline-block;
@@ -89,8 +96,7 @@ body {
 }
 
 .container ul li:hover a {
-    transform: translateX(20px);
-    /* Move text slightly on hover */
+    transform: translateX(25px);
 }
 
 .container ul li a.active {
@@ -102,7 +108,6 @@ body {
 .social-icons {
     display: flex;
     justify-content: center;
-    /* Center icons */
     gap: 15px;
     margin-top: 20px;
     position: absolute;
@@ -111,9 +116,94 @@ body {
 .social-icon img {
     width: 24px;
     height: 24px;
-    transition: transform 0.3s;
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.social-icon img[src*="github"] {
+    filter: brightness(0.5);
 }
 
 .social-icon:hover img {
     transform: scale(1.1);
+}
+
+/* Styles for Experience Section */
+.experience-container {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+.experience-container:hover {
+    background-color: rgba(59, 57, 145, 0.3);
+}
+
+h3 {
+    font-weight: 400;
+    color: #f7f7f7;
+    margin-bottom: 5px;
+}
+
+.job-title {
+    font-weight: 300;
+    color: #b3b3b3;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-weight: 300;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+}
+
+.tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: #95eb9cfb;
+    color: #0e4804;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tag:hover {
+    background-color: #1c5f3a;
+    color: #32cd32;
+}
+
+/* Styles for Portfolio Section */
+.portfolio-container {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+.portfolio-container:hover {
+    background-color: rgba(59, 57, 145, 0.3);
+}
+
+h3 {
+    font-weight: 400;
+    color: #f7f7f7;
+    margin-bottom: 5px;
+}
+
+.job-title {
+    font-weight: 300;
+    color: #b3b3b3;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-weight: 300;
+    color: #e0e0e0;
+    margin-bottom: 15px;
 }

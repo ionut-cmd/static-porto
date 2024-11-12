@@ -5,5 +5,3 @@ permalink: /portfolio/
 ---
 
 # Portfolio
-
-Showcase your projects here.

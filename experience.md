@@ -5,5 +5,3 @@ permalink: /experience/
 ---
 
 # Experience
-
-Describe your professional experience here.
