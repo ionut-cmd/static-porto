@@ -46,15 +46,18 @@ body {
 }
 
 .sidebar {
-    flex: 0 0 500px;
+    flex: 0 0 700px;
     padding: 20px;
     background-color: transparent;
     position: sticky;
     top: 100px;
     height: 100vh;
     overflow-y: auto;
-    min-width: 500px;
+    min-width: 700px;
     margin-right: 300px;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 /* Navigation items */
