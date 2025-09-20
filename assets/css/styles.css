@@ -86,9 +86,12 @@ body {
 
 .profile-img {
     width: 240px;
-    height: 240px;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    display: block;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center;
     border: 2px solid rgba(255, 255, 255, 0.35);
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
 }
@@ -301,5 +304,27 @@ h3 {
 @media (prefers-reduced-motion: reduce) {
     * {
         transition: none !important;
+    }
+}
+
+/* iPhone / small screens */
+@media (max-width: 600px) {
+    .profile-img {
+        width: 160px;
+    }
+}
+
+/* Fallback for very old browsers without aspect-ratio support */
+@supports not (aspect-ratio: 1 / 1) {
+    .profile-img {
+        width: 240px;
+        height: 240px;
+    }
+
+    @media (max-width: 600px) {
+        .profile-img {
+            width: 160px;
+            height: 160px;
+        }
     }
 }
