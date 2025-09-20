@@ -1,12 +1,31 @@
-/* Reset default browser styles */
+/* =========================
+   Base + Theme Variables
+   ========================= */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --glow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    --accent: #32cd32;
+    --link: #9ad0ff;
+}
+
+/* =========================
+   Reset
+   ========================= */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* =========================
+   Body (dark gradient + text)
+   ========================= */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
     line-height: 1.6;
     font-weight: 300;
     background: radial-gradient(circle, #201e5edf 0%, #0c0a27df 50%, #1e1d61 100%);
@@ -15,52 +34,91 @@ body {
     padding: 0;
 }
 
-.about-text {
-    font-size: 1.2em;
-    font-weight: 300;
-    font-family: 'Roboto', sans-serif;
-    color: #d1ffd1;
-    line-height: 1.3;
-    margin-bottom: 20px;
-}
-
-.logo a {
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: bold;
-    color: #f7f7f7c1;
-}
-
-/* Main layout styles */
+/* =========================
+   Layout
+   ========================= */
 .content-wrapper {
-    display: flex;
-    padding-top: 100px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    /* left main, right sidebar */
+    gap: 40px;
+    padding: 80px 40px 40px;
 }
 
 .main-content {
-    flex: 2;
-    max-width: 800px;
-    margin-left: 300px;
-    padding: 20px;
-    background-color: transparent;
+    max-width: 860px;
+    margin-left: 0;
+    padding: 0;
+    background: transparent;
 }
 
 .sidebar {
-    flex: 0 0 700px;
-    padding: 20px;
-    background-color: transparent;
+    padding: 0;
+    background: transparent;
     position: sticky;
-    top: 100px;
-    height: 100vh;
+    top: 40px;
+    height: calc(100vh - 40px);
     overflow-y: auto;
-    min-width: 700px;
-    margin-right: 300px;
-
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    min-width: 0;
 }
 
-/* Navigation items */
+/* Allow absolutely positioned social icons to anchor to .container */
+.container {
+    position: relative;
+}
+
+/* =========================
+   Profile card 
+   ========================= */
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 24px;
+    border-radius: 18px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--glow);
+}
+
+.profile-img {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.profile-name {
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.profile-tagline {
+    margin: 6px 0 0;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.profile-text {
+    display: flex;
+    flex-direction: column;
+    /* forces title over description */
+}
+
+.profile-name {
+    margin: 0 0 6px;
+}
+
+.profile-tagline {
+    margin: 0;
+}
+
 .container ul {
     list-style: none;
     padding: 0;
@@ -107,7 +165,9 @@ body {
     font-weight: bold;
 }
 
-/* Social icons styles */
+/* =========================
+   Social Icons
+   ========================= */
 .social-icons {
     display: flex;
     justify-content: center;
@@ -130,36 +190,54 @@ body {
     transform: scale(1.1);
 }
 
-/* Styles for Experience Section */
-.experience-container {
+/* =========================
+   Section cards
+   ========================= */
+.experience-container,
+.portfolio-container {
     padding: 20px;
     margin-bottom: 20px;
-    background-color: transparent;
-    transition: background-color 0.3s;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: var(--glow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-.experience-container:hover {
-    background-color: rgba(59, 57, 145, 0.3);
+.experience-container:hover,
+.portfolio-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 h3 {
-    font-weight: 400;
-    color: #f7f7f7;
-    margin-bottom: 5px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+    letter-spacing: 0.2px;
 }
 
 .job-title {
-    font-weight: 300;
-    color: #b3b3b3;
+    color: #cfd7ff;
     margin-bottom: 10px;
 }
 
 .description {
-    font-weight: 300;
-    color: #e0e0e0;
+    color: #e9e9f3;
     margin-bottom: 15px;
 }
 
+.about-text {
+    font-size: 1.1rem;
+    color: #e7ffe7;
+    line-height: 1.55;
+    margin-bottom: 20px;
+}
+
+/* Tags (pill with shine) */
 .tags {
     display: flex;
     gap: 10px;
@@ -167,46 +245,61 @@ h3 {
 }
 
 .tag {
-    background-color: #95eb9cfb;
-    color: #0e4804;
-    padding: 5px 10px;
-    border-radius: 15px;
+    background: linear-gradient(180deg, #a4f3ab, #77d786);
+    color: #0b3c09;
+    padding: 6px 12px;
+    border-radius: 999px;
     font-size: 12px;
     text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
+    outline: 1px solid rgba(255, 255, 255, 0.25);
+    transition: transform 0.15s ease, filter 0.15s ease;
 }
 
 .tag:hover {
-    background-color: #1c5f3a;
-    color: #32cd32;
+    transform: translateY(-1px);
+    filter: brightness(1.07);
 }
 
-/* Styles for Portfolio Section */
-.portfolio-container {
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: transparent;
-    transition: background-color 0.3s;
+/* =========================
+   Responsive
+   ========================= */
+@media (max-width: 1200px) {
+    .profile-img {
+        width: 200px;
+        height: 200px;
+    }
 }
 
-.portfolio-container:hover {
-    background-color: rgba(59, 57, 145, 0.3);
+@media (max-width: 1100px) {
+    .content-wrapper {
+        grid-template-columns: 1fr;
+        padding: 60px 20px 20px;
+    }
+
+    .sidebar {
+        position: static;
+        height: auto;
+        min-width: 0;
+    }
+    .social-icons {
+        position: static;
+        justify-content: flex-start;
+        margin-top: 16px;
+    }
 }
 
-h3 {
-    font-weight: 400;
-    color: #f7f7f7;
-    margin-bottom: 5px;
+@media (max-width: 600px) {
+    .profile-img {
+        width: 160px;
+        height: 160px;
+    }
 }
 
-.job-title {
-    font-weight: 300;
-    color: #b3b3b3;
-    margin-bottom: 10px;
-}
-
-.description {
-    font-weight: 300;
-    color: #e0e0e0;
-    margin-bottom: 15px;
+/* =========================
+   Reduced motion
+   ========================= */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
 }
