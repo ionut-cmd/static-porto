@@ -1,7 +1,12 @@
 # _config.yml
+title: "Ionut Bostan"
 description: "Welcome to my personal portfolio website."
 baseurl: ""
-url: "http://ionutbostan.com"
+url: "https://ionutbostan.com"
+
+# Custom
+ga_measurement_id: "G-1Q9BLFRB8Y"
+profile_image: "/assets/img/profile.png"
 
 # Plugins
 plugins:
