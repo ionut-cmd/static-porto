@@ -263,6 +263,52 @@ h3 {
     filter: brightness(1.07);
 }
 
+/* Publications  */
+.publications-container {
+    margin-top: 24px;
+    /* gentle spacing from previous section */
+}
+
+.publications-title {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.pub-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pub-item {
+    padding: 14px 0;
+    border-top: 1px solid var(--glass-border);
+}
+
+.pub-item:first-child {
+    border-top: none;
+}
+
+.pub-name {
+    margin: 0 0 8px 0;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.2px;
+}
+
+.pub-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Make titles a touch smaller on mobile to avoid wrapping too hard */
+@media (max-width: 600px) {
+    .pub-name {
+        font-size: 1rem;
+    }
+}
+
 /* =========================
    Responsive
    ========================= */
