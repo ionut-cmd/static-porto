@@ -1,19 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 
 <head>
     {% assign cache_bust = site.github.build_revision | default: site.time | date: '%s' %}
+    {% assign page_title = page.title | default: site.title %}
+    {% assign page_description = page.description | default: site.description %}
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ page.title | default: site.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.author.job_title }}{% endif %}</title>
+    <meta name="description" content="{{ page_description | strip_html | strip_newlines | escape }}" />
+    <link rel="canonical" href="{{ page.url | absolute_url }}" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0a0f1f" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)" />
+
+    <!-- Social previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ page_title | escape }}" />
+    <meta property="og:description" content="{{ page_description | strip_html | strip_newlines | escape }}" />
+    <meta property="og:url" content="{{ page.url | absolute_url }}" />
+    <meta property="og:image" content="{{ site.profile_image | absolute_url }}" />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- Apply the saved theme before first paint to avoid a flash -->
+    <script>
+        (function () {
+            var root = document.documentElement;
+            root.classList.add('js');
+            try {
+                var theme = localStorage.getItem('theme');
+                if (theme === 'light' || theme === 'dark') root.setAttribute('data-theme', theme);
+            } catch (e) { }
+        })();
+    </script>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}?v={{ cache_bust }}">
-    <link rel="icon" href="{{ '/assets/icons/favicon/favicon.ico' | relative_url }}" type="image/x-icon">
+    <link rel="icon" href="{{ '/assets/icons/favicon/favicon.ico' | relative_url }}" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/icons/favicon/favicon-32x32.png' | relative_url }}">
+    <link rel="apple-touch-icon" href="{{ '/assets/icons/favicon/apple-touch-icon.png' | relative_url }}">
+    <link rel="manifest" href="{{ '/assets/icons/favicon/site.webmanifest' | relative_url }}">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": {{ site.author.name | jsonify }},
+        "jobTitle": {{ site.author.job_title | jsonify }},
+        "worksFor": { "@type": "Organization", "name": {{ site.author.company | jsonify }}, "url": {{ site.author.company_url | jsonify }} },
+        "url": {{ site.url | jsonify }},
+        "image": {{ site.profile_image | absolute_url | jsonify }},
+        "sameAs": {{ site.social | map: 'url' | jsonify }}
+    }
+    </script>
 
     {%- if jekyll.environment == "production" and site.ga_measurement_id -%}
     <!-- GA4 -->
@@ -30,169 +73,9 @@
 </head>
 
 <body>
-    <main class="content-wrapper">
-        <div class="main-content">
-            <div class="container">
-                <div class="profile-card glassy">
-                    <img class="profile-img" src="{{ site.profile_image | relative_url }}"
-                        alt="Profile photo of {{ site.title | escape }}" />
-                    <div class="profile-text">
-                        <h1 class="profile-name">{{ site.title }}</h1>
-                        <p class="profile-tagline">{{ site.description }}</p>
-                    </div>
-                </div>
-                {{ content }}
-                <ul>
-                    <li><a href="#about" data-section="about">About Me</a></li>
-                    <li><a href="#experience" data-section="experience">Experience</a></li>
-                    <li><a href="#portfolio" data-section="portfolio">Portfolio</a></li>
-                    <li><a href="#publications" data-section="publications">Publications</a></li>
-                </ul>
-                <!-- Social Media Icons -->
-                <div class="social-icons">
-                    <a href="https://www.linkedin.com/in/ionut-bostan-25a598196/" target="_blank" class="social-icon">
-                        <img src="/assets/icons/linkedin.png" alt="LinkedIn" />
-                    </a>
-                    <a href="https://github.com/ionut-cmd" target="_blank" class="social-icon">
-                        <img src="/assets/icons/github.png" alt="GitHub" />
-                    </a>
-                    <a href="https://orcid.org/0009-0003-8656-0454" target="_blank" class="social-icon">
-                        <img src="/assets/icons/orcid.webp" alt="ORCID" />
-                    </a>
-                </div>
-            </div>
-        </div>
-        <aside class="sidebar">
-            <div class="page-container">
-                <section id="about">
-                    <pp class="about-text">I am a passionate and dedicated developer with experience in IoT security, secure onboarding, vulnerability detection,
-                    and advanced accessibility solutions. My professional journey includes working on projects such as certificate-based IoT
-                    device onboarding, a CLI tool for SBOM generation, and emotion-aware TTS synthesis.
-                    
-                    In my free time, I enjoy hiking, swimming, and playing pool, as well as spending quality time with my family. I'm also
-                    an avid Raspberry Pi enthusiast, frequently exploring new projects that merge my technical skills with creative
-                    problem-solving.</p>
-                </section>
-                </br>
-                <section id="experience">
-                    <div class="experience-container">
-                        <h3>Secure Onboarding and Offboarding of IoT Devices</h3>
-                        <p class="job-title">Software Developer - NquiringMinds</p>
-                        <p class="description">
-                        Contributed on implementing a secure onboarding mechanism for IoT devices, utilising a novel certificate-based authentication
-                        instead of traditional PSK methods. My contribution involved modifying a FreeRADIUS server to manage device
-                        onboarding and offboarding by revoking access for malicious devices.
-                        The project was executed on Raspberry Pi devices, where I designed and built a custom C server and a lightweight
-                        companion application to demonstrate the full onboarding and offboarding workflow. The solution aimed to enhance the
-                        security and efficiency of IoT device connectivity in real-world deployments.
-                        <div class="tags">
-                            <span class="tag">C/C++</span>
-                            <span class="tag">bash</span>
-                            <span class="tag">SEALSQ</span>
-                            <span class="tag">BRSKI</span>
-                            <a href="https://github.com/nqminds/trustnetz" target="_blank" class="tag">GitHub</a>
-                        </div>
-                    </div>
-                    <div class="experience-container">
-                        <h3>CLI Tool for SBOM Generation and Vulnerability Detection in Multi-Language Projects</h3>
-                        <p class="job-title">Software Developer - NquiringMinds</p>
-                        <p class="description">Developed a command-line interface (CLI) tool that automates the generation of Software Bill of Materials (SBOMs) and
-                        performs comprehensive vulnerability detection across various project types. This tool supports a wide range of project
-                        environments, including binary firmware, Docker images, and applications written in C/C++, and
-                        more. Designed to enhance security and transparency, the tool identifies potential vulnerabilities, enabling proactive
-                        security management for diverse software ecosystems.
-                        
-                        As a continuation of this project, I co-authored a publication, presenting the tool's framework and impact on modern software security practices..</p>
-                        <div class="tags">
-                            <span class="tag">Node.js</span>
-                            <span class="tag">SBOM</span>
-                            <span class="tag">JavaScript</span>
-                            <a href="https://github.com/nqminds/SBOM-GAP" target="_blank" class="tag">GitHub</a>
-                            <a href="https://arxiv.org/abs/2411.01377" target="_blank" class="tag">Arxiv</a>
-                        </div>
-                    </div>
-                    <div class="experience-container">
-                        <h3>Automated Website Generator for Spreadsheet-Based Content</h3>
-                        <p class="job-title">Software Developer - NquiringMinds</p>
-                        <p class="description">Developed a website generator tool that converts spreadsheet documents into fully functional websites using YAML schemas
-                        and Docusaurus. This tool automates the transformation of structured data into web content, significantly streamlining
-                        content management and publication processes for organizations. The tool was primarily built in JavaScript and enables
-                        non-technical users to generate websites directly from spreadsheets, with data validation and formatting handled via
-                        YAML.
-                        This solution is currently used by the Internet of Things Security Foundation (IoTSF), a prominent UK organization
-                        dedicated to advancing IoT security standards. The project highlights my skills in JavaScript, YAML, and Docusaurus, as
-                        well as my ability to create scalable, user-friendly tools.
-                        </p>
-                        <div class="tags">
-                            <span class="tag">Node.js</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Yamal</span>
-                            <span class="tag">Docusaurus</span>
-                            <a href="https://af.iotsf.org/" target="_blank" class="tag">Website</a>
-                        </div>
-                    </div>
-                </section>
-                <section id="portfolio">
-                    <div class="portfolio-container">
-                        <h3>Enhancing Social Media Accessibility: Emotion-Aware Text-to-Speech System with Integrated Text Analysis</h3>
-                        <p class="job-title">Lead Researcher and Developer - University Of Surrey</p>
-                        <p class="description">In my dissertation, I developed an end-to-end Text-to-Speech (TTS) synthesis model. I focused on creating an emotion-aware TTS system by
-                        incorporating emotion embeddings into the model, enabling it to generate expressive, contextually enriched audio outputs
-                        from text. Using a transformer-based architecture, I applied advanced natural language processing (NLP) techniques to
-                        analyse text for emotional cues and synthesise speech that captured both the speaker’s characteristics and emotional
-                        tone.</p>
-                        <div class="tags">
-                            <span class="tag">NLP</span>
-                            <span class="tag">PyTorch</span>
-                            <span class="tag">Transformers</span>
-                            <span class="tag">Hugging Face</span>
-                            <a href="https://github.com/ionut-cmd/Emotion-Aware-TTS?tab=readme-ov-file" target="_blank" class="tag">GitHub</a>
-                            <a href="https://ionut-cmd.github.io/Emotion-Aware-TTS/" target="_blank" class="tag">Website</a>
-                            <a href="https://arxiv.org/abs/2410.19199" target="_blank" class="tag">Arxiv</a>
-                        </div>
-                    </div>
-                </section>
-                <section id="publications">
-                    <div class="portfolio-container publications-container">
-                        <h3 class="publications-title">Publications</h3>
-                        <ul class="pub-list">
-                            <li class="pub-item">
-                                <div class="pub-text">
-                                    <h4 class="pub-name">Enhancing Social Media Accessibility: Emotion-Aware Text-to-Speech System with
-                                        Integrated Text Analysis</h4>
-                                    <div class="pub-meta">
-                                        <a href="https://arxiv.org/abs/2410.19199" target="_blank" class="tag">Arxiv</a>
-                                    </div>
-                                </div>
-                            </li>
-                
-                            <li class="pub-item">
-                                <div class="pub-text">
-                                    <h4 class="pub-name">How Memory-Safe is IoT? Assessing the Impact of Memory-Protection Solutions for
-                                        Securing Wireless Gateways</h4>
-                                    <div class="pub-meta">
-                                        <a href="https://arxiv.org/abs/2411.01377" target="_blank" class="tag">Arxiv</a>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="pub-item">
-                                <div class="pub-text">
-                                    <h4 class="pub-name">
-                                        UniBOM – A Unified SBOM Analysis and Visualisation Tool for IoT Systems and Beyond
-                                    </h4>
-                                    <div class="pub-meta">
-                                        <a href="https://arxiv.org/abs/2511.22359" target="_blank" class="tag">Arxiv</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
-        </aside>
-    </main>
-    <script src="{{ '/assets/js/script.js' | relative_url }}?v={{ cache_bust }}"></script>
+    <a class="skip-link" href="#main">Skip to content</a>
+    {{ content }}
+    <script src="{{ '/assets/js/script.js' | relative_url }}?v={{ cache_bust }}" defer></script>
 </body>
 
 </html>

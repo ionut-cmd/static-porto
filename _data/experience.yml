@@ -1,0 +1,34 @@
+# Roles, newest first. `period` is optional; add it (e.g. "2025 – Present") to show dates.
+
+- role: Staff Engineer
+  org: NquiringMinds
+  org_url: "https://nquiringminds.com"
+  current: true
+  summary: >-
+    Leading the design and delivery of AI agent systems, MCP integrations and
+    data platforms, from first design to production.
+  highlights:
+    - Built MCP servers exposing 30 tools over PostgreSQL, and a reusable React and Node MCP chat client published on npm.
+    - Designed event-driven agent pipelines that turn long technical standards into running workflows, with each agent owning one stage.
+    - Delivered AI-assisted decision-support tools for defence projects, with every recommendation shown next to its evidence.
+    - Built ETL pipelines loading millions of records into PostgreSQL with parallel, idempotent ingestion and de-duplication.
+    - Built and debugged drone hardware: a Holybro X650 with a Raspberry Pi companion computer, my own ESC debug tool, and parts designed in FreeCAD and 3D-printed.
+    - Made the team faster with Claude Code skills, starter templates and standard deployment pipelines.
+
+- role: Software Developer
+  org: NquiringMinds
+  org_url: "https://nquiringminds.com"
+  summary: >-
+    IoT security, software supply-chain tooling and research.
+  highlights:
+    - Certificate-based onboarding and offboarding of IoT devices, using FreeRADIUS on Raspberry Pi.
+    - A CLI for SBOM generation and vulnerability detection across firmware, Docker images and multi-language projects.
+    - A spreadsheet-to-website generator used by the IoT Security Foundation.
+    - Co-authored research on memory safety in IoT gateways and on SBOM analysis.
+
+- role: Lead Researcher and Developer
+  org: University of Surrey
+  org_url: "https://www.surrey.ac.uk"
+  summary: >-
+    Dissertation research on emotion-aware text-to-speech for social media
+    accessibility, later published on arXiv.

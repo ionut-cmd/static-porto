@@ -1,12 +1,31 @@
 # _config.yml
 title: "Ionut Bostan"
-description: "Welcome to my personal portfolio website."
+description: "Staff Engineer building AI agents, MCP servers and PostgreSQL data pipelines, with recent work in defence decision support."
 baseurl: ""
 url: "https://ionutbostan.com"
 
 # Custom
 ga_measurement_id: "G-1Q9BLFRB8Y"
 profile_image: "/assets/img/profile.png"
+avatar_image: "/assets/img/profile-avatar.webp"
+
+author:
+  name: "Ionut Bostan"
+  job_title: "Staff Engineer"
+  company: "NquiringMinds"
+  company_url: "https://nquiringminds.com"
+  tagline: "I build AI agents that work from real data, not vibes."
+
+social:
+  - name: LinkedIn
+    icon: linkedin
+    url: "https://www.linkedin.com/in/ionut-bostan-25a598196/"
+  - name: GitHub
+    icon: github
+    url: "https://github.com/ionut-cmd"
+  - name: ORCID
+    icon: orcid
+    url: "https://orcid.org/0009-0003-8656-0454"
 
 # Plugins
 plugins:

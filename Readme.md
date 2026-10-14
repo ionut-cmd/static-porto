@@ -48,6 +48,20 @@ bundle exec jekyll clean
 ## Configuration
 
 Update the \_config.yml file to configure the site settings, such as the title, description, URL, and more.
+Your name, job title, tagline and social links are under `author` and `social` in the same file.
+
+## Editing content
+
+The home page (`index.html`) is generated from data files, so most updates don't touch any HTML:
+
+| File | What it holds |
+| --- | --- |
+| `_data/projects.yml` | Project cards and filter categories. Set `private: true` for work with no public code |
+| `_data/experience.yml` | Roles, newest first. Add `period: "2025 – Present"` to show dates |
+| `_data/publications.yml` | Papers, newest first |
+| `_data/skills.yml` | Toolkit groups at the bottom of the page |
+
+The About text lives directly in `index.html`. Styles are in `assets/css/styles.css`, and the theme toggle, section highlighting and project filters are in `assets/js/script.js`.
 
 ## Troubleshooting
 

@@ -1,0 +1,247 @@
+---
+layout: default
+---
+{%- assign projects = site.data.projects.items -%}
+{%- assign categories = site.data.projects.categories -%}
+<div class="layout">
+    <div class="intro">
+        <header class="hero">
+            <img class="avatar" src="{{ site.avatar_image | relative_url }}" width="104" height="104"
+                alt="{{ site.author.name }} on a mountain trail" fetchpriority="high" />
+            <h1 class="hero-name">{{ site.author.name }}</h1>
+            <p class="hero-role">
+                {{ site.author.job_title }} at
+                <a href="{{ site.author.company_url }}" target="_blank" rel="noopener">{{ site.author.company }}</a>
+            </p>
+            <p class="hero-tagline">{{ site.author.tagline }}</p>
+            <div class="hero-actions">
+                <ul class="social" role="list">
+                    {%- for s in site.social %}
+                    <li>
+                        <a class="icon-button" href="{{ s.url }}" target="_blank" rel="noopener me"
+                            aria-label="{{ s.name }}" title="{{ s.name }}">
+                            {%- include icons/{{ s.icon }}.svg -%}
+                        </a>
+                    </li>
+                    {%- endfor %}
+                </ul>
+                <span class="divider" aria-hidden="true"></span>
+                <button class="icon-button theme-toggle" type="button" data-theme-toggle
+                    aria-label="Switch colour theme" title="Switch colour theme">
+                    {%- include icons/sun.svg -%}
+                    {%- include icons/moon.svg -%}
+                </button>
+            </div>
+        </header>
+
+        <nav class="site-nav" aria-label="Sections">
+            <ul role="list">
+                <li><a href="#about"><span class="nav-line" aria-hidden="true"></span>About</a></li>
+                <li><a href="#projects"><span class="nav-line" aria-hidden="true"></span>Projects</a></li>
+                <li><a href="#experience"><span class="nav-line" aria-hidden="true"></span>Experience</a></li>
+                <li><a href="#publications"><span class="nav-line" aria-hidden="true"></span>Publications</a></li>
+                <li><a href="#toolkit"><span class="nav-line" aria-hidden="true"></span>Toolkit</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main id="main" class="content">
+        <section id="about" class="section" aria-labelledby="about-title">
+            <h2 class="section-title" id="about-title">About</h2>
+            <div class="prose">
+                <p>
+                    I'm a Staff Engineer at {{ site.author.company }}, working where <strong>AI agents, MCP and
+                    databases</strong> meet. Most days that means building MCP servers and clients that let LLMs call
+                    real tools and query real databases, designing event-driven agent pipelines that hand work from one
+                    stage to the next, and putting it all behind interfaces people actually want to use. My agents get
+                    exactly the permissions they need, which is usually fewer than they ask for.
+                </p>
+                <p>
+                    Behind every confident LLM answer there should be a well-indexed table, so I spend a lot of time on
+                    the <strong>data side</strong>: ETL pipelines loading millions of records into PostgreSQL, parallel
+                    and idempotent ingestion, and messy public datasets turned into clean schemas, with enough XBRL
+                    parsing along the way to have opinions about accountants.
+                </p>
+                <p>
+                    Lately that has included <strong>defence work</strong>: multi-agent simulations and AI
+                    decision-support tools where every recommendation has to show its evidence. Before that I worked on IoT security (device onboarding, SBOMs and vulnerability
+                    detection), and researched emotion-aware text-to-speech at the University of Surrey.
+                </p>
+                <p>
+                    I like it when software meets <strong>hardware</strong>, too. I built a Holybro X650 quadcopter
+                    with a Raspberry Pi on top that sends it commands, wrote my own tool to read and debug its ESCs,
+                    and taught myself FreeCAD to design and 3D-print the parts it needed.
+                </p>
+                <p>
+                    I'm usually the one who reads the 200-page spec so the rest of the team doesn't have to. Away from
+                    the keyboard you'll find me hiking, swimming, playing pool, spending time with my family, or
+                    starting yet another Raspberry Pi project.
+                </p>
+            </div>
+            <dl class="figures">
+                <div class="figure"><dt>MCP tools over PostgreSQL</dt><dd>30</dd></div>
+                <div class="figure"><dt>research outputs in one database</dt><dd>2.6M</dd></div>
+                <div class="figure"><dt>commits since 2023</dt><dd>1,800+</dd></div>
+                <div class="figure"><dt>papers on arXiv</dt><dd>{{ site.data.publications | size }}</dd></div>
+            </dl>
+        </section>
+
+        <section id="projects" class="section" aria-labelledby="projects-title">
+            <h2 class="section-title" id="projects-title">Projects</h2>
+            <p class="section-lead">
+                Selected work from the last few years. Most of it lives in private repositories, so not every project
+                has public code to link to.
+            </p>
+
+            <div class="filters" role="group" aria-label="Filter projects by area">
+                <button class="chip" type="button" data-filter="all" aria-pressed="true">
+                    All <span class="chip-count">{{ projects | size }}</span>
+                </button>
+                {%- for c in categories %}
+                {%- assign count = 0 -%}
+                {%- for p in projects -%}
+                {%- if p.categories contains c.id -%}{%- assign count = count | plus: 1 -%}{%- endif -%}
+                {%- endfor %}
+                <button class="chip" type="button" data-filter="{{ c.id }}" aria-pressed="false">
+                    {{ c.label }} <span class="chip-count">{{ count }}</span>
+                </button>
+                {%- endfor %}
+            </div>
+            <p class="sr-only" aria-live="polite" data-filter-status></p>
+
+            <ul class="project-list" role="list">
+                {%- for p in projects %}
+                <li class="card" data-categories="{{ p.categories | join: ' ' }}">
+                    <article>
+                        <p class="eyebrow">
+                            <span>
+                                {%- for cid in p.categories -%}
+                                {%- assign cat = categories | where: "id", cid | first -%}
+                                {{ cat.label }}{% unless forloop.last %} · {% endunless %}
+                                {%- endfor -%}
+                            </span>
+                            <span class="eyebrow-year">{{ p.years }}</span>
+                        </p>
+                        <h3 class="card-title">{{ p.title }}</h3>
+                        <p class="card-summary">{{ p.summary }}</p>
+
+                        {%- if p.highlights %}
+                        <ul class="card-points">
+                            {%- for h in p.highlights %}
+                            <li>{{ h }}</li>
+                            {%- endfor %}
+                        </ul>
+                        {%- endif %}
+
+                        {%- if p.images %}
+                        <div class="card-gallery">
+                            {%- for img in p.images %}
+                            <figure>
+                                <img src="{{ img.src | relative_url }}" alt="{{ img.alt }}" loading="lazy"
+                                    decoding="async" width="480" height="360" />
+                                {%- if img.caption %}<figcaption>{{ img.caption }}</figcaption>{% endif %}
+                            </figure>
+                            {%- endfor %}
+                        </div>
+                        {%- endif %}
+
+                        {%- if p.stats %}
+                        <dl class="card-stats">
+                            {%- for s in p.stats %}
+                            <div><dt>{{ s.label }}</dt><dd>{{ s.value }}</dd></div>
+                            {%- endfor %}
+                        </dl>
+                        {%- endif %}
+
+                        <ul class="tags" role="list" aria-label="Technologies">
+                            {%- for t in p.tags %}
+                            <li class="tag">{{ t }}</li>
+                            {%- endfor %}
+                        </ul>
+
+                        <div class="card-foot">
+                            {%- for l in p.links %}
+                            <a class="link-pill" href="{{ l.url }}" target="_blank" rel="noopener">
+                                {{ l.label }} {% include icons/arrow-up-right.svg -%}
+                                <span class="sr-only">(opens in a new tab)</span>
+                            </a>
+                            {%- endfor %}
+                            {%- if p.private or p.note %}
+                            <span class="private-note">
+                                {%- if p.private %}{% include icons/lock.svg %} Private codebase{% endif -%}
+                                {%- if p.private and p.note %} · {% endif -%}
+                                {%- if p.note %}{{ p.note }}{% endif -%}
+                            </span>
+                            {%- endif %}
+                        </div>
+                    </article>
+                </li>
+                {%- endfor %}
+            </ul>
+        </section>
+
+        <section id="experience" class="section" aria-labelledby="experience-title">
+            <h2 class="section-title" id="experience-title">Experience</h2>
+            <ol class="timeline" role="list">
+                {%- for job in site.data.experience %}
+                <li class="timeline-item{% if job.current %} is-current{% endif %}">
+                    <div class="timeline-head">
+                        <h3 class="timeline-role">{{ job.role }}</h3>
+                        {%- if job.org_url %}
+                        <a class="timeline-org" href="{{ job.org_url }}" target="_blank" rel="noopener">{{ job.org }}</a>
+                        {%- else %}
+                        <span class="timeline-org">{{ job.org }}</span>
+                        {%- endif %}
+                        {%- if job.current %}<span class="badge">Current</span>{% endif %}
+                        {%- if job.period %}<span class="timeline-period">{{ job.period }}</span>{% endif %}
+                    </div>
+                    <p class="timeline-summary">{{ job.summary }}</p>
+                    {%- if job.highlights %}
+                    <ul class="card-points">
+                        {%- for h in job.highlights %}
+                        <li>{{ h }}</li>
+                        {%- endfor %}
+                    </ul>
+                    {%- endif %}
+                </li>
+                {%- endfor %}
+            </ol>
+        </section>
+
+        <section id="publications" class="section" aria-labelledby="publications-title">
+            <h2 class="section-title" id="publications-title">Publications</h2>
+            <ul class="pub-list" role="list">
+                {%- for pub in site.data.publications %}
+                <li class="pub">
+                    <a href="{{ pub.url }}" target="_blank" rel="noopener">
+                        <span class="pub-year">{{ pub.year }}</span>
+                        <span class="pub-title">{{ pub.title }}</span>
+                        <span class="pub-venue">{{ pub.venue }} {% include icons/arrow-up-right.svg %}</span>
+                    </a>
+                </li>
+                {%- endfor %}
+            </ul>
+        </section>
+
+        <section id="toolkit" class="section" aria-labelledby="toolkit-title">
+            <h2 class="section-title" id="toolkit-title">Toolkit</h2>
+            <div class="toolkit">
+                {%- for group in site.data.skills %}
+                <div class="toolkit-group">
+                    <h3>{{ group.group }}</h3>
+                    <ul class="tags" role="list">
+                        {%- for item in group.items %}
+                        <li class="tag">{{ item }}</li>
+                        {%- endfor %}
+                    </ul>
+                </div>
+                {%- endfor %}
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <p>© {{ site.time | date: '%Y' }} {{ site.author.name }}</p>
+            <p>Built with Jekyll and hosted on GitHub Pages.</p>
+        </footer>
+    </main>
+</div>
