@@ -10,7 +10,7 @@
   highlights:
     - Built MCP servers exposing 30 tools over PostgreSQL, and a reusable React and Node MCP chat client published on npm.
     - Designed event-driven agent pipelines that turn long technical standards into running workflows, with each agent owning one stage.
-    - Delivered AI-assisted decision-support tools for defence wargaming that show every recommendation next to its evidence.
+    - Delivered AI-assisted decision-support tools for defence projects, with every recommendation shown next to its evidence.
     - Built ETL pipelines loading millions of records into PostgreSQL with parallel, idempotent ingestion and de-duplication.
     - Built and debugged drone hardware: a Holybro X650 with a Raspberry Pi companion computer, my own ESC debug tool, and parts designed in FreeCAD and 3D-printed.
     - Made the team faster with Claude Code skills, starter templates and standard deployment pipelines.

@@ -95,50 +95,18 @@ items:
     tags: [Next.js, Node.js, PostgreSQL, tdx Volt]
     private: true
 
-  - title: JISR workflow simulator (STANAG 4559)
+  - title: Defence decision-support systems
     categories: [defence, ai]
     years: "2026"
     summary: >-
-      A multi-agent simulation of the NATO joint ISR collection workflow defined
-      in AEDP-5.1. I read the 196-page standard end to end and gave each stage
-      its own service agent. Nine agents carry a collection requirement through
-      request, tasking, collection and reporting until the product is published,
-      with no central conductor.
+      Multi-agent simulations and AI-assisted decision-support tools for defence
+      projects. I build event-driven agents that each own one stage of a process
+      and hand work on to the next, and the interfaces people use to follow what
+      the system is doing and why.
     highlights:
-      - Every hand-off is a schema-validated document, and the next agent reacts to it by applying the standard's business rules
-      - A standalone, wire-compatible STANAG 4559 NSIL server in Java (CORBA and SOAP) for testing client applications
-      - A live dashboard showing the workflow cascade, plus OAuth-secured MCP access to a partner's catalogue server
-    tags: [Node.js, Java, CORBA / SOAP, JSON Schema, Multi-agent, MCP]
-    private: true
-
-  - title: AI dynamic targeting COP
-    categories: [defence, ai]
-    years: "2026"
-    summary: >-
-      A web map and decision-support suite for AI-assisted dynamic targeting in a
-      wargame. Eight linked views run from ground truth (a 324-target catalogue
-      and its ORBAT) to only what has actually been observed: the AI's targeting
-      matrix, reconnaissance tasking, intelligence reports and audit trail, each
-      shown beside its evidence.
-    highlights:
-      - Steps through a simulated run, or follows live reports as they arrive
-      - Filters and steps live in the URL, so any view can be shared as a link
-    tags: [Node.js, Express, Vite, MapLibre GL, GeoJSON]
-    private: true
-    note: Exercise data only
-
-  - title: Maritime defence operator tools
-    categories: [defence]
-    years: "2026"
-    summary: >-
-      Operator-facing tools for a real-time sense–decide–act agent pipeline,
-      which turns a fused sensor picture into engagement requests, each backed by
-      an explicit rules-of-engagement proof. I built the visuals the team uses to
-      follow, trust and debug it.
-    highlights:
-      - Mission replay, track override, classifier introspection and a threat risk list
-      - WebGL tactical map with radar overlay, plus the auth server and CI/CD deployment
-    tags: [TypeScript, WebGL, three.js, MapLibre GL, Yjs, gRPC]
+      - Every AI recommendation is shown next to the evidence behind it, with a full audit trail
+      - Interactive and real-time views with replay, so any run can be reviewed step by step
+    tags: [Node.js, TypeScript, Java, Multi-agent, MapLibre GL, WebGL]
     private: true
 
   - title: Holybro X650 with a Raspberry Pi companion
