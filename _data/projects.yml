@@ -1,0 +1,258 @@
+# Projects shown on the home page, in display order.
+#
+# categories: one or more ids from the `categories` list; drives the filter chips.
+# private:    true for work with no public code. Shows a "Private codebase" note
+#             instead of links (links can still be added, e.g. a paper or npm page).
+# stats:      optional list of { value, label } shown as a small figure row.
+# images:     optional list of { src, alt, caption } shown as a small gallery.
+
+categories:
+  - id: data
+    label: Data & databases
+  - id: ai
+    label: AI agents & MCP
+  - id: defence
+    label: Defence
+  - id: hardware
+    label: Hardware & drones
+  - id: security
+    label: Security & IoT
+  - id: research
+    label: Research
+
+items:
+  - title: Company-intelligence MCP server
+    categories: [ai, data]
+    years: "2025–26"
+    summary: >-
+      An MCP server that lets LLMs investigate UK organisations through 30 tools
+      backed by PostgreSQL: ownership chains and ultimate owners, persons with
+      significant control, filed financials, research grants, charities and
+      public-sector contracts.
+    highlights:
+      - Runs over stdio for local agents and streamable HTTP for many AI clients at once
+      - Graph-style tools trace circular ownership and research-collaboration networks
+      - Typed tool inputs (Zod schemas), so the model knows exactly what each tool accepts
+    tags: [TypeScript, MCP SDK, PostgreSQL, Zod, Express]
+    private: true
+
+  - title: MCP chat client for React
+    categories: [ai]
+    years: "2026"
+    summary: >-
+      A drop-in React chat component and Node backend that connects any web app
+      to an MCP server. The model streams its answer and calls MCP tools as it
+      goes, so adding an AI assistant to an app takes a few lines.
+    highlights:
+      - Streaming responses with tool calls and conversation management
+      - Next.js route helpers and themeable styles via CSS variables
+    tags: [React, TypeScript, Next.js, OpenAI API, MCP]
+    links:
+      - label: npm
+        url: "https://www.npmjs.com/package/@nqminds/mcp-client"
+
+  - title: Companies House data pipeline
+    categories: [data]
+    years: "2025"
+    summary: >-
+      Python ETL that downloads Companies House's monthly accounts archives and
+      loads every XBRL and iXBRL fact into PostgreSQL, alongside company
+      masterdata, persons with significant control, UK public contracts and the
+      Charity Commission register.
+    highlights:
+      - Parallel, multi-process ingestion with a live ETA and adaptive resource use
+      - Idempotent by design, with files de-duplicated by SHA-256, so it is safe to stop and re-run
+      - Schema built around PostgreSQL's limits, e.g. hash-based uniqueness for oversized values
+    tags: [Python, PostgreSQL, psycopg 3, XBRL, ETL]
+    private: true
+
+  - title: UKRI research-grants harvester
+    categories: [data]
+    years: "2025"
+    summary: >-
+      Harvests the UKRI Gateway to Research API into a normalised PostgreSQL
+      schema with full referential integrity, while staying within the API's
+      rate limits.
+    stats:
+      - value: "171k"
+        label: research projects
+      - value: "2.6M"
+        label: research outputs
+      - value: "£70bn"
+        label: funding tracked
+      - value: "18"
+        label: tables
+    tags: [Python, PostgreSQL, REST APIs, Data modelling]
+    private: true
+
+  - title: Company accounts comparison app
+    categories: [data]
+    years: "2025"
+    summary: >-
+      A Next.js app for comparing company accounts where the browser never
+      touches the database. Queries travel over a peer-to-peer message bus to a
+      worker next to PostgreSQL, which runs them and sends the results back.
+    tags: [Next.js, Node.js, PostgreSQL, tdx Volt]
+    private: true
+
+  - title: JISR workflow simulator (STANAG 4559)
+    categories: [defence, ai]
+    years: "2026"
+    summary: >-
+      A multi-agent simulation of the NATO joint ISR collection workflow defined
+      in AEDP-5.1. I read the 196-page standard end to end and gave each stage
+      its own service agent. Nine agents carry a collection requirement through
+      request, tasking, collection and reporting until the product is published,
+      with no central conductor.
+    highlights:
+      - Every hand-off is a schema-validated document, and the next agent reacts to it by applying the standard's business rules
+      - A standalone, wire-compatible STANAG 4559 NSIL server in Java (CORBA and SOAP) for testing client applications
+      - A live dashboard showing the workflow cascade, plus OAuth-secured MCP access to a partner's catalogue server
+    tags: [Node.js, Java, CORBA / SOAP, JSON Schema, Multi-agent, MCP]
+    private: true
+
+  - title: AI dynamic targeting COP
+    categories: [defence, ai]
+    years: "2026"
+    summary: >-
+      A web map and decision-support suite for AI-assisted dynamic targeting in a
+      wargame. Eight linked views run from ground truth (a 324-target catalogue
+      and its ORBAT) to only what has actually been observed: the AI's targeting
+      matrix, reconnaissance tasking, intelligence reports and audit trail, each
+      shown beside its evidence.
+    highlights:
+      - Steps through a simulated run, or follows live reports as they arrive
+      - Filters and steps live in the URL, so any view can be shared as a link
+    tags: [Node.js, Express, Vite, MapLibre GL, GeoJSON]
+    private: true
+    note: Exercise data only
+
+  - title: Maritime defence operator tools
+    categories: [defence]
+    years: "2026"
+    summary: >-
+      Operator-facing tools for a real-time sense–decide–act agent pipeline,
+      which turns a fused sensor picture into engagement requests, each backed by
+      an explicit rules-of-engagement proof. I built the visuals the team uses to
+      follow, trust and debug it.
+    highlights:
+      - Mission replay, track override, classifier introspection and a threat risk list
+      - WebGL tactical map with radar overlay, plus the auth server and CI/CD deployment
+    tags: [TypeScript, WebGL, three.js, MapLibre GL, Yjs, gRPC]
+    private: true
+
+  - title: Holybro X650 with a Raspberry Pi companion
+    categories: [hardware]
+    years: "2026"
+    summary: >-
+      Built a Holybro X650 quadcopter (Pixhawk 6X running PX4, AM32 ESCs) with a
+      Raspberry Pi mounted on top as a companion computer. The Pi talks to the
+      flight controller over serial MAVLink, so flights, missions and telemetry
+      can be driven from code instead of only from a radio.
+    highlights:
+      - Set up and tuned the airframe, flight controller and ESCs with QGroundControl
+      - Pi-to-Pixhawk serial link for MAVSDK commands, plus a Pi camera on board
+      - Designed and 3D-printed the Pi mount myself (see the FreeCAD project)
+    tags: [PX4, Pixhawk 6X, MAVLink, MAVSDK, Raspberry Pi, QGroundControl]
+    private: true
+
+  - title: AM32 ESC flash-read and debug tool
+    categories: [hardware]
+    years: "2026"
+    summary: >-
+      My own command-line tool for checking drone ESCs. It speaks the BLHeli
+      bootloader protocol through an Arduino acting as a USB-to-1-wire bridge,
+      reads each ESC's firmware version and settings straight from flash, and
+      writes a report comparing every ESC with the AM32 defaults and with the
+      others.
+    highlights:
+      - Read-only by design (init, set-address and read-flash only), with a CRC-checked double read to confirm the chip and link are healthy
+      - Reports flag the odd one out (timing, PWM, protections, motor direction) and keep hand-written notes when regenerated
+      - Used with PX4 flight-log analysis to diagnose motor problems across all four ESCs
+    tags: [Python, pySerial, BLHeli protocol, AM32, Arduino, Embedded debugging]
+    private: true
+
+  - title: 3D-printed drone parts designed in FreeCAD
+    categories: [hardware]
+    years: "2026"
+    summary: >-
+      I taught myself FreeCAD to design parts the drone needed, then printed
+      them. Two-part Raspberry Pi 4 and Pi 5 mounts hold the companion computer
+      on the X650's frame, and the parametric source files make them easy to
+      adapt to new boards.
+    images:
+      - src: /assets/img/projects/rpi5-mount.webp
+        alt: FreeCAD model of the two-part Raspberry Pi 5 mount, shown semi-transparent with its screw holes
+        caption: Raspberry Pi 5 mount
+      - src: /assets/img/projects/rpi4-mount.webp
+        alt: FreeCAD model of the Raspberry Pi 4 mount base plate, with a slot and screw holes
+        caption: Raspberry Pi 4 mount
+    tags: [FreeCAD, 3D printing, Parametric CAD, STL]
+    private: true
+
+  - title: Claude Code skills for the team
+    categories: [ai]
+    years: "2026"
+    summary: >-
+      Reusable Claude Code skills that deploy Node and Python services behind
+      nginx, TLS and PM2 with CI, and scaffold new apps from tested starter
+      templates. New services start from a working baseline.
+    tags: [Claude Code, Agent skills, nginx, PM2, GitHub Actions]
+    private: true
+
+  - title: Secure onboarding and offboarding of IoT devices
+    categories: [security]
+    years: "2023–25"
+    summary: >-
+      Certificate-based onboarding for IoT devices in place of pre-shared keys. I
+      modified a FreeRADIUS server to onboard devices and revoke access for
+      malicious ones, and built a C server and companion app on Raspberry Pi to
+      demonstrate the full workflow.
+    tags: [C / C++, Bash, FreeRADIUS, BRSKI, SEALSQ]
+    links:
+      - label: GitHub
+        url: "https://github.com/nqminds/trustnetz"
+
+  - title: SBOM generation and vulnerability detection CLI
+    categories: [security]
+    years: "2023–25"
+    summary: >-
+      A CLI that generates Software Bills of Materials and finds known
+      vulnerabilities across binary firmware, Docker images and C/C++ and other
+      projects. It led to two co-authored papers.
+    tags: [Node.js, JavaScript, SBOM, CVE analysis]
+    links:
+      - label: GitHub
+        url: "https://github.com/nqminds/UniBOM"
+      - label: UniBOM paper
+        url: "https://arxiv.org/abs/2511.22359"
+      - label: Memory-safety paper
+        url: "https://arxiv.org/abs/2411.01377"
+
+  - title: Spreadsheet-to-website generator
+    categories: [security]
+    years: "2024"
+    summary: >-
+      Turns spreadsheet content into a full website using YAML schemas and
+      Docusaurus, with validation and formatting built in. Used by the Internet
+      of Things Security Foundation (IoTSF) to publish its assurance framework.
+    tags: [Node.js, JavaScript, YAML, Docusaurus]
+    links:
+      - label: Website
+        url: "https://af.iotsf.org/"
+
+  - title: Emotion-aware text-to-speech
+    categories: [research]
+    years: "2024"
+    summary: >-
+      My University of Surrey dissertation: an end-to-end, transformer-based TTS
+      model with emotion embeddings. It analyses text for emotional cues and
+      speaks with the matching tone, to make social media more accessible.
+    tags: [PyTorch, Transformers, NLP, Hugging Face]
+    links:
+      - label: GitHub
+        url: "https://github.com/ionut-cmd/Emotion-Aware-TTS"
+      - label: Demo
+        url: "https://ionut-cmd.github.io/Emotion-Aware-TTS/"
+      - label: arXiv
+        url: "https://arxiv.org/abs/2410.19199"

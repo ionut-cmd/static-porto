@@ -1,7 +1,6 @@
 ---
-layout: default
-title: "Portfolio"
+layout: redirect
 permalink: /portfolio/
+redirect_to: "/#projects"
+sitemap: false
 ---
-
-# Portfolio

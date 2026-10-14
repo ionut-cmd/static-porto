@@ -1,7 +1,6 @@
 ---
-layout: default
-title: "Experience"
+layout: redirect
 permalink: /experience/
+redirect_to: "/#experience"
+sitemap: false
 ---
-
-# Experience

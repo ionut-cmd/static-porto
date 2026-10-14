@@ -1,0 +1,22 @@
+# Toolkit groups shown at the bottom of the home page.
+
+- group: AI & agents
+  items: [Model Context Protocol, Multi-agent systems, OpenAI API, Claude Code, Agent skills]
+
+- group: Data
+  items: [PostgreSQL, SQL, ETL pipelines, XBRL / iXBRL, JSON Schema, Data modelling]
+
+- group: Languages
+  items: [TypeScript, JavaScript, Python, C / C++, Java, Bash]
+
+- group: Web & visualisation
+  items: [Node.js, React, Next.js, Vite, MapLibre GL, three.js / WebGL]
+
+- group: Infrastructure
+  items: [Linux, Docker, nginx, PM2, GitHub Actions]
+
+- group: Hardware & drones
+  items: [PX4 / Pixhawk, MAVLink / MAVSDK, Raspberry Pi, Arduino, FreeCAD, 3D printing]
+
+- group: Security
+  items: [SBOM, CVE analysis, FreeRADIUS, Certificate-based auth, OAuth]
